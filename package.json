@@ -1,0 +1,71 @@
+{
+  "name": "typelaunch-starter",
+  "private": true,
+  "version": "2.0.0",
+  "type": "module",
+  "main": "./dist/typelaunch-starter.umd.cjs",
+  "module": "./dist/typelaunch-starter.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "import": "./dist/typelaunch-starter.js",
+      "require": "./dist/typelaunch-starter.umd.cjs"
+    }
+  },
+  "scripts": {
+    "dev": "vitest",
+    "dev:web": "vite",
+    "preview": "vite preview",
+    "build": "vite build",
+    "lint": "tsc && eslint . --ext .ts && prettier --no-config --check 'src/**/*.ts'",
+    "format": "eslint --fix --ext .ts && prettier --no-config --write 'src/**/*.ts'",
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "cov": "vitest run --coverage",
+    "cov:watch": "vitest --coverage",
+    "cov:detail": "vitest run --coverage && open-cli coverage/index.html",
+    "change": "changeset",
+    "change:empty": "changeset --empty",
+    "review": "changeset version",
+    "release": "pnpm run build && changeset publish"
+  },
+  "devDependencies": {
+    "@changesets/cli": "^2.26.0",
+    "@types/node": "^18.14.0",
+    "@typescript-eslint/eslint-plugin": "^5.53.0",
+    "@typescript-eslint/parser": "^5.53.0",
+    "@vitest/coverage-c8": "^0.28.5",
+    "eslint": "^8.34.0",
+    "eslint-config-prettier": "^8.6.0",
+    "eslint-plugin-prettier": "^4.2.1",
+    "fast-check": "^3.6.3",
+    "open-cli": "^7.1.0",
+    "prettier": "^2.8.4",
+    "typescript": "^4.9.3",
+    "vite": "^4.1.0",
+    "vite-plugin-dts": "2.0.0-beta.1",
+    "vitest": "^0.28.5",
+    "winston": "^3.8.2"
+  },
+  "files": [
+    "dist"
+  ],
+  "eslintConfig": {
+    "root": true,
+    "parser": "@typescript-eslint/parser",
+    "plugins": [
+      "@typescript-eslint",
+      "prettier"
+    ],
+    "extends": [
+      "eslint:recommended",
+      "plugin:@typescript-eslint/eslint-recommended",
+      "plugin:@typescript-eslint/recommended",
+      "prettier"
+    ],
+    "rules": {
+      "spaced-comment": "warn",
+      "yoda": "error"
+    }
+  }
+}
