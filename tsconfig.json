@@ -4,7 +4,6 @@
     "types": ["vitest/importMeta"],
     "baseUrl": ".",
     "paths": {
-      "@tRPC/*": ["src/trpc/*"],
       "~/*": ["src/*"]
     }
   }

@@ -4,7 +4,6 @@ import { resolve } from "path";
 export default getViteConfig({
   resolve: {
     alias: {
-      "@tRPC": resolve(__dirname, "./src/trpc"),
       "~": resolve(__dirname, "./src"),
     },
   },

@@ -1,6 +1,6 @@
 import type { inferProcedureInput } from "@trpc/server";
 import { beforeEach, describe } from "vitest";
-import { AppRouter, appRouter, createContext } from "@tRPC/server";
+import { AppRouter, appRouter, createContext } from "~/trpc/server";
 
 interface Ctx {
   tRPCcaller: ReturnType<AppRouter["createCaller"]>;
