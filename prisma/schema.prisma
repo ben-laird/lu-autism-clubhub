@@ -1,0 +1,83 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id        String  @id @default(uuid())
+  firstName String
+  lastName  String
+  email     String  @unique
+  /// Whether the user has a verified email. Defaults to `false`
+  verified  Boolean @default(false)
+
+  /// What part this user plays in the club
+  Role      Role @relation(fields: [roleLevel], references: [level])
+  roleLevel Int
+
+  /// Projects this user owns
+  ProjectsOwned Project[] @relation(name: "projectOwner")
+  /// Steps this user owns
+  StepsOwned    Step[]
+
+  @@unique([firstName, lastName])
+}
+
+model Role {
+  level Int    @id
+  name  String @unique
+
+  // User/Project Links
+  UsersWith       User[]
+  ProjectsWithMin Project[]
+}
+
+model Project {
+  id   String @id @default(uuid())
+  name String @unique
+
+  // Categorizations
+  Type   ProjectType @relation(fields: [typeId], references: [id])
+  typeId String
+  Steps  Step[]
+
+  // Ownership and Permissions
+  Owner       User?   @relation(fields: [ownerId], references: [id], name: "projectOwner")
+  ownerId     String?
+  /// The minimum role necessary to access this project
+  MinimumRole Role    @relation(fields: [roleLevel], references: [level])
+  roleLevel   Int
+}
+
+model ProjectType {
+  id   String @id @default(uuid())
+  name String @unique
+
+  Projects Project[]
+}
+
+model Step {
+  id     String   @id @default(uuid())
+  Type   StepType @relation(fields: [typeId], references: [id])
+  typeId String
+
+  Project   Project @relation(fields: [projectId], references: [id])
+  projectId String
+
+  Owner   User?   @relation(fields: [ownerId], references: [id])
+  ownerId String?
+}
+
+model StepType {
+  id   String @id @default(uuid())
+  name String @unique
+
+  Step Step[]
+}
