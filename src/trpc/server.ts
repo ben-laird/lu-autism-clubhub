@@ -1,20 +1,5 @@
-import { initTRPC } from "@trpc/server";
-import type { FetchCreateContextFnOptions as Options } from "@trpc/server/adapters/fetch";
-import SuperJSON from "superjson";
 import { z } from "zod";
-
-export const createContext = (options: Options) => {
-  return {
-    ...options,
-    greetingPhrase: (name: string) => `Hello there, ${name}`,
-  };
-};
-
-export const t = initTRPC
-  .context<typeof createContext>()
-  .create({ transformer: SuperJSON });
-
-export const { router, procedure } = t;
+import { createContext as ctx, procedure, router } from "./initTRPC";
 
 export const appRouter = router({
   greet: procedure
@@ -26,3 +11,15 @@ export const appRouter = router({
 });
 
 export type AppRouter = typeof appRouter;
+
+export const trpcServerSide = (astroSiphon: {
+  request: Request;
+  response: { headers: Headers };
+}) => {
+  const {
+    request: req,
+    response: { headers: resHeaders },
+  } = astroSiphon;
+
+  return appRouter.createCaller(ctx({ req, resHeaders }));
+};
