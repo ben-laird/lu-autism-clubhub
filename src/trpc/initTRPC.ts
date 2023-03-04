@@ -3,11 +3,13 @@ import { initTRPC } from "@trpc/server";
 import type { FetchCreateContextFnOptions as Options } from "@trpc/server/adapters/fetch";
 import SuperJSON from "superjson";
 
+const prisma = new PrismaClient();
+
 export const createContext = (options: Options) => {
   return {
     ...options,
     greetingPhrase: (name: string) => `Hello there, ${name}`,
-    prisma: new PrismaClient(),
+    prisma,
   };
 };
 
