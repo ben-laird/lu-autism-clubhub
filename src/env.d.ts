@@ -1,12 +1,13 @@
 /* eslint-disable spaced-comment */
 /// <reference types="astro/client" />
 
-enum Env {
-  DATABASE_URL,
-  TRPC_DEV_URL,
-  TRPC_PROD_URL,
+interface ImportMetaEnv {
+  readonly DATABASE_URL: string | undefined;
+  readonly VITE_TRPC_DEV_URL: string | undefined;
+  readonly VITE_TRPC_PROD_URL: string | undefined;
+  readonly SITE: string
 }
 
-type EnvRecord<T extends string> = Readonly<Record<T, string>>;
-
-type ImportMetaEnv = EnvRecord<keyof typeof Env>;
+interface ImportMeta {
+  readonly env: ImportMetaEnv;
+}
