@@ -1,7 +1,7 @@
 ---
-import tRPC from "~/trpc/client";
+import {trpcServerSide as tRPC} from "~/trpc/server";
 
-const query = await tRPC.greet.query("Roxanne");
+const query = await tRPC(Astro).greet("Roxanne");
 ---
 
 <html lang="en">
