@@ -1,7 +1,9 @@
 import { z } from "zod";
 import { createContext as ctx, procedure, router } from "./initTRPC";
+import { users } from "./routers";
 
 export const appRouter = router({
+  users,
   greet: procedure
     .input((unfiltered) => {
       const schema = z.string();
