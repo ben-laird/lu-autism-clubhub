@@ -6,7 +6,6 @@ interface ImportMetaEnv {
   readonly VITE_TRPC_DEV_URL: string | undefined;
   readonly VITE_TRPC_PROD_URL: string | undefined;
   readonly SITE: string
-  readonly PUBLIC_VERCEL_URL: string
 }
 
 interface ImportMeta {
