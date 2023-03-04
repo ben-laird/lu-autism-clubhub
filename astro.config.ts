@@ -5,7 +5,7 @@ import { defineConfig } from "astro/config";
 const {
   DEV: inDev,
   VITE_TRPC_DEV_URL: devUrl,
-  VITE_TRPC_PROD_URL: prodUrl,
+  PUBLIC_VERCEL_URL: prodUrl,
 } = import.meta.env;
 
 // console.log(`dev: ${devUrl}, prod: ${prodUrl}`);
