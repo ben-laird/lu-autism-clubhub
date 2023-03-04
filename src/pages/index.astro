@@ -1,5 +1,6 @@
 ---
-import {trpcServerSide as tRPC} from "~/trpc/server";
+import TestTrpc from "~/components/TestTrpc";
+import { trpcServerSide as tRPC } from "~/trpc/server";
 
 const query = await tRPC(Astro).greet("Roxanne");
 ---
@@ -14,5 +15,7 @@ const query = await tRPC(Astro).greet("Roxanne");
   </head>
   <body>
     <h1>{query}</h1>
+
+    <TestTrpc client:load name="Jenny" />
   </body>
 </html>
