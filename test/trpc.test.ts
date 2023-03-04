@@ -1,26 +1,24 @@
 import type { inferProcedureInput } from "@trpc/server";
 import { beforeEach, describe } from "vitest";
-import { AppRouter, appRouter, createContext } from "~/trpc/server";
+import { type AppRouter, trpcServerSide } from "~/trpc/server";
 
 interface Ctx {
-  tRPCcaller: ReturnType<AppRouter["createCaller"]>;
+  tRPCTest: ReturnType<typeof trpcServerSide>;
 }
 
 describe<Ctx>("tRPC tests", (it) => {
   beforeEach<Ctx>((ctx) => {
-    ctx.tRPCcaller = appRouter.createCaller(
-      createContext({
-        req: new Request("https://example.com"),
-        resHeaders: new Headers(),
-      })
-    );
+    ctx.tRPCTest = trpcServerSide({
+      request: new Request("https://example.com"),
+      response: { headers: new Headers() },
+    });
   });
 
-  it("should greet correctly", async ({ expect, tRPCcaller }) => {
+  it("should greet correctly", async ({ expect, tRPCTest }) => {
     type Input = inferProcedureInput<AppRouter["greet"]>;
     const input: Input = "Jenny";
 
-    const example = await tRPCcaller.greet(input);
+    const example = await tRPCTest.greet(input);
 
     expect(example).toMatch("Hello there, Jenny");
   });
