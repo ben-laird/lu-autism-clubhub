@@ -21,10 +21,12 @@
     "release": "pnpm run build && changeset publish"
   },
   "dependencies": {
+    "@astrojs/solid-js": "^2.0.2",
     "@prisma/client": "^4.11.0",
     "@trpc/client": "^10.13.2",
     "@trpc/server": "^10.13.2",
     "astro": "^2.0.16",
+    "solid-js": "^1.4.3",
     "superjson": "^1.12.2",
     "zod": "^3.20.6"
   },
