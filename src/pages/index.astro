@@ -1,21 +1,13 @@
 ---
+import Base from "~/components/Base.astro";
 import TestTrpc from "~/components/TestTrpc";
 import { trpcServerSide as tRPC } from "~/trpc/server";
 
-const query = await tRPC(Astro).greet("Roxanne");
+const query = await tRPC(Astro).greet("Abby");
 ---
 
-<html lang="en">
-  <head>
-    <meta charset="utf-8" />
-    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-    <meta name="viewport" content="width=device-width" />
-    <meta name="generator" content={Astro.generator} />
-    <title>Astro</title>
-  </head>
-  <body>
-    <h1>{query}</h1>
+<Base title="Autism Club Hub">
+  <h1>{query}</h1>
 
-    <TestTrpc client:load name="Jenny" />
-  </body>
-</html>
+  <TestTrpc client:load name="Audrey" />
+</Base>
