@@ -1,6 +1,6 @@
 ---
 import Base from "~/components/Base.astro";
-import TestTrpc from "~/components/TestTrpc";
+import GetTrpcData from "~/components/GetTrpcData";
 import { trpcServerSide as tRPC } from "~/trpc/server";
 
 const query = await tRPC(Astro).greet("Abby");
@@ -9,5 +9,5 @@ const query = await tRPC(Astro).greet("Abby");
 <Base title="Autism Club Hub">
   <h1>{query}</h1>
 
-  <TestTrpc client:load name="Audrey" />
+  <GetTrpcData client:load />
 </Base>
