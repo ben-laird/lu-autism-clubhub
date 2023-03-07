@@ -1,7 +1,7 @@
 import { Component, createResource, createSignal, Show } from "solid-js";
 import { trpcClientSide as trpc } from "~/trpc/client";
 
-const GetTrpcData: Component = () => {
+export const GetTrpcData: Component = () => {
   const [inputName, setInputName] = createSignal("");
 
   const [name, setName] = createSignal<string>();
@@ -14,8 +14,9 @@ const GetTrpcData: Component = () => {
   };
 
   return (
-    <div>
+    <div class="prose prose-pink border-4 bg-slate-500">
       <form
+        class="bg-slate-500"
         onsubmit={(e) => {
           e.preventDefault();
           handleCall();
@@ -27,18 +28,18 @@ const GetTrpcData: Component = () => {
             setInputName(target.value);
           }}
         />
-        <button onClick={handleCall}>Greet</button>
+        <button class="m-2 rounded-md bg-slate-600 p-1" onClick={handleCall}>
+          Greet
+        </button>
       </form>
 
       <Show
         when={greeting()}
-        fallback={<p>Submit the form to be greeted!</p>}
+        fallback={<p class="prose">Submit the form to be greeted!</p>}
         keyed
       >
-        {(g) => <p>{g}</p>}
+        {(g) => <p class="prose">{g}</p>}
       </Show>
     </div>
   );
 };
-
-export default GetTrpcData;
