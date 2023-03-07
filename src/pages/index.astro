@@ -1,13 +1,13 @@
 ---
-import Base from "~/layouts/Base.astro";
-import GetTrpcData from "~/components/GetTrpcData";
+import { GetTrpcData } from "~/components";
+import Main from "~/layouts/Main.astro";
 import { trpcServerSide as tRPC } from "~/trpc/server";
 
 const query = await tRPC(Astro).greet("Abby");
 ---
 
-<Base title="Autism Club Hub">
+<Main title="Autism Club Hub">
   <h1>{query}</h1>
 
   <GetTrpcData client:load />
-</Base>
+</Main>
