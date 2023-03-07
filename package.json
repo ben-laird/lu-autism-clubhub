@@ -8,8 +8,8 @@
     "dev:web": "astro dev",
     "preview": "astro preview",
     "build": "astro build",
-    "lint": "tsc && eslint . --ext .ts && prettier --no-config --check 'src/**/*.ts'",
-    "format": "eslint --fix --ext .ts && prettier --no-config --write 'src/**/*.ts'",
+    "lint": "tsc && eslint . --ext .ts --ext .tsx && prettier --check 'src/**/*.{ts,tsx,astro}'",
+    "format": "eslint --fix --ext .ts --ext .tsx && prettier --write 'src/**/*.{ts,tsx,astro}'",
     "test": "vitest run",
     "test:watch": "vitest",
     "cov": "vitest run --coverage",
@@ -24,10 +24,13 @@
     "@astrojs/solid-js": "^2.0.2",
     "@astrojs/tailwind": "^3.0.1",
     "@astrojs/vercel": "^3.1.4",
+    "@nanostores/persistent": "^0.7.0",
+    "@nanostores/solid": "^0.3.2",
     "@prisma/client": "^4.11.0",
     "@trpc/client": "^10.13.2",
     "@trpc/server": "^10.13.2",
     "astro": "^2.0.17",
+    "nanostores": "^0.7.4",
     "solid-js": "^1.4.3",
     "superjson": "^1.12.2",
     "tailwindcss": "^3.0.24",
@@ -42,10 +45,14 @@
     "@vitest/coverage-c8": "^0.28.5",
     "eslint": "^8.34.0",
     "eslint-config-prettier": "^8.6.0",
+    "eslint-plugin-astro": "^0.23.0",
     "eslint-plugin-prettier": "^4.2.1",
+    "eslint-plugin-tailwindcss": "^3.10.1",
     "fast-check": "^3.6.3",
     "open-cli": "^7.1.0",
     "prettier": "^2.8.4",
+    "prettier-plugin-astro": "^0.8.0",
+    "prettier-plugin-tailwindcss": "^0.2.4",
     "prisma": "^4.11.0",
     "typescript": "^4.9.3",
     "vite": "^4.1.0",
@@ -63,11 +70,19 @@
       "eslint:recommended",
       "plugin:@typescript-eslint/eslint-recommended",
       "plugin:@typescript-eslint/recommended",
-      "prettier"
+      "prettier",
+      "tailwindcss",
+      "astro"
     ],
     "rules": {
       "spaced-comment": "warn",
       "yoda": "error"
     }
+  },
+  "prettier": {
+    "plugins": [
+      "prettier-plugin-tailwindcss",
+      "prettier-plugin-astro"
+    ]
   }
 }
