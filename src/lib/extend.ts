@@ -1,6 +1,6 @@
 export const extendFrom = <T>(defaultValue: T) => {
   return (extend?: ExtendFrom<T>) => {
-    const coalesce = (f: ((def: T) => T) | T): f is (def: T) => T =>
+    const coalesce = (f: ExtendFrom<T>): f is (def: T) => T =>
       typeof f === "function";
 
     return extend === undefined
