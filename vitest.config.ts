@@ -10,6 +10,9 @@ export default getViteConfig({
   test: {
     includeSource: ["src/**/*.{js,ts}"],
     coverage: { reporter: ["html-spa", "text"] },
+    api: {
+      port: 3000,
+    },
   },
   define: {
     "import.meta.vitest": "undefined",
