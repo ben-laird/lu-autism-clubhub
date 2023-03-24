@@ -1,13 +1,8 @@
 ---
-import { GetTrpcData } from "~/components";
+import { Hero } from "~/components";
 import Main from "~/layouts/Main.astro";
-import { trpcServerSide as tRPC } from "~/trpc/server";
-
-const query = await tRPC(Astro).greet("Abby");
 ---
 
 <Main title="Autism Club Hub">
-  <h1>{query}</h1>
-
-  <GetTrpcData client:load />
+  <Hero />
 </Main>

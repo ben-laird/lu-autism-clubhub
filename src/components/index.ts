@@ -1,4 +1,4 @@
-export * from "./GetTrpcData";
+export * from "./Hero";
 export * from "./Nav";
-export * from "./Sidebar";
+export * from "./Login";
 export * from "./ThemeToggle";

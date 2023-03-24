@@ -19,21 +19,18 @@ export const ThemeToggle = () => {
     on(
       theme,
       () => {
-        const rootClasses = document.documentElement.classList;
-
-        if (theme() === "light") rootClasses.remove("dark");
-        else rootClasses.add("dark");
+        const { add, remove } = document.documentElement.classList;
+        theme() === "light" ? remove("dark") : add("dark");
       },
       { defer: true }
     )
   );
+
   return (
     <button
       type="button"
-      class="flex items-center rounded-md p-1"
-      onClick={() => {
-        setTheme(theme);
-      }}
+      class="flex items-center rounded-md bg-zinc-700 p-1 text-gray-200 dark:bg-zinc-100 dark:text-gray-800"
+      onClick={() => setTheme(theme)}
     >
       Toggle Theme
     </button>

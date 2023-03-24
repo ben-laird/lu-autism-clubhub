@@ -1,51 +1,25 @@
 ---
-import { Nav, Sidebar, ThemeToggle } from "~/components";
-import { Top } from "~/components/Top";
+import { Nav } from "~/components";
 import { extendFrom, InferExt } from "~/lib/extend";
 import Base from "./Base.astro";
 
 interface Props {
   title: string;
-  headerTitle?: string;
   navLinks?: InferExt<typeof extNav>;
-  sidebarLinks?: InferExt<typeof extSide>;
   children: HTMLElement[];
 }
 
-const {
-  title,
-  navLinks,
-  sidebarLinks,
-  headerTitle = "Autism Club Hub",
-} = Astro.props as Props;
+const { title, navLinks } = Astro.props as Props;
 
 const extNav = extendFrom([
   { name: "Home", href: "/" },
   { name: "About", href: "/about" },
-  { name: "Log In", href: "/" },
+  { name: "Log In", href: "/login" },
 ]);
 
-const extSide = extendFrom([
-  { name: "Home", href: "/" },
-  { name: "About", href: "/about" },
-]);
 ---
 
 <Base title={title}>
-  <Top title={headerTitle} subtitle={title}>
-    <Nav links={extNav(navLinks)} />
-  </Top>
-  <div class="relative h-full flex grid-cols-3">
-    <div class="w-1/4 m-2">
-      <ThemeToggle client:load />
-      <Sidebar links={extSide(sidebarLinks)} />
-      <slot name="leftSide" />
-    </div>
-    <div class="w-full m-2">
-      <slot />
-    </div>
-    <div class="w-1/4 m-2">
-      <slot name="rightSide" />
-    </div>
-  </div>
+  <Nav links={extNav(navLinks)} />
+  <slot />
 </Base>
