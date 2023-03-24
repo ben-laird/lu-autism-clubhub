@@ -14,20 +14,10 @@ const { title } = Astro.props as Props;
     <meta name="viewport" content="width=device-width" />
     <meta name="generator" content={Astro.generator} />
     <title>{title}</title>
-    <script is:inline>
-      const theme = (() => {
-        const localTheme = localStorage.getItem("theme");
-        if (localTheme) return localTheme;
+    <script>
+      import { getTheme } from "~/lib/getTheme";
 
-        return window.matchMedia("(prefers-color-scheme: dark)").matches
-          ? "dark"
-          : "light";
-      })();
-
-      const classList = document.documentElement.classList;
-
-      if (theme === "light") classList.remove("dark");
-      else classList.add("dark");
+      getTheme();
     </script>
   </head>
   <body class="h-screen dark:bg-zinc-700 bg-zinc-100">
