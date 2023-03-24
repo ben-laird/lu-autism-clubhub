@@ -1,23 +1,16 @@
-import { z } from "zod";
-import { createContext as ctx, procedure, router } from "./initTRPC";
-import { users } from "./routers";
+import { createContext as ctx, router } from "./initTRPC";
+import * as routers from "./routers";
 
-export const appRouter = router({
-  users,
-  greet: procedure
-    .input((unfiltered) => {
-      const schema = z.string();
-      return schema.parse(unfiltered);
-    })
-    .query(({ input, ctx: { greetingPhrase } }) => greetingPhrase(input)),
-});
+export const appRouter = router({ ...routers });
 
 export type AppRouter = typeof appRouter;
 
-export const trpcServerSide = (astroSiphon: {
+export interface AstroSiphon {
   request: Request;
   response: { headers: Headers };
-}) => {
+};
+
+export const trpcServerSide = (astroSiphon: AstroSiphon) => {
   const {
     request: req,
     response: { headers: resHeaders },
