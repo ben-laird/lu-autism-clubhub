@@ -1,6 +1,8 @@
 # Project-specific exclusions
 dist
 
+.astro
+
 prisma/*
 !prisma/schema.prisma
 !prisma/migrations
