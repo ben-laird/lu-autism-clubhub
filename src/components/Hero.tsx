@@ -12,7 +12,7 @@ export const Hero: Component = () => (
           mauris vel justo efficitur consequat.
         </p>
         <a
-          href="#"
+          href="/404"
           class="rounded bg-blue-500 py-2 px-4 font-bold text-white hover:bg-blue-600"
         >
           Join us now
