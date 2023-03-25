@@ -11,10 +11,9 @@ datasource db {
 }
 
 model User {
-  id        String  @id @default(uuid())
+  email     String  @id
   firstName String
   lastName  String
-  email     String  @unique
   /// Whether the user has a verified email. Defaults to `false`
   verified  Boolean @default(false)
 
@@ -40,16 +39,15 @@ model Role {
 }
 
 model Project {
-  id   String @id @default(uuid())
-  name String @unique
+  name String @id
 
   // Categorizations
-  Type   ProjectType @relation(fields: [typeId], references: [id])
+  Type   ProjectType @relation(fields: [typeId], references: [name])
   typeId String
   Steps  Step[]
 
   // Ownership and Permissions
-  Owner       User?   @relation(fields: [ownerId], references: [id], name: "projectOwner")
+  Owner       User?   @relation(fields: [ownerId], references: [email], name: "projectOwner")
   ownerId     String?
   /// The minimum role necessary to access this project
   MinimumRole Role    @relation(fields: [roleLevel], references: [level])
@@ -57,27 +55,25 @@ model Project {
 }
 
 model ProjectType {
-  id   String @id @default(uuid())
-  name String @unique
+  name String @id
 
   Projects Project[]
 }
 
 model Step {
   id     String   @id @default(uuid())
-  Type   StepType @relation(fields: [typeId], references: [id])
+  Type   StepType @relation(fields: [typeId], references: [name])
   typeId String
 
-  Project   Project @relation(fields: [projectId], references: [id])
+  Project   Project @relation(fields: [projectId], references: [name])
   projectId String
 
-  Owner   User?   @relation(fields: [ownerId], references: [id])
+  Owner   User?   @relation(fields: [ownerId], references: [email])
   ownerId String?
 }
 
 model StepType {
-  id   String @id @default(uuid())
-  name String @unique
+  name String @id
 
   Step Step[]
 }
