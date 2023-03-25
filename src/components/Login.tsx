@@ -1,11 +1,11 @@
-import { Component, createSignal, For, splitProps } from "solid-js";
+import { Component, createSignal, For } from "solid-js";
 import { createStore } from "solid-js/store";
 import { Show } from "solid-js/web";
 import { z } from "zod";
 
 const schema = z.object({
-  username: z.string().email(),
-  password: z
+  Username: z.string().email(),
+  Password: z
     .string()
     .regex(
       /^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,}$/,
@@ -15,24 +15,27 @@ const schema = z.object({
 
 type FormValues = z.infer<typeof schema>;
 
-const RenderIssues: Component<{ issues: z.ZodIssue[] }> = ({ issues }) => {
-  return (
-    <div class="m-1 justify-center rounded-md border-2 border-red-500 p-1">
-      <For each={issues}>
-        {({ message, path }) => (
-          <div class="mt-1 text-sm text-red-500">
-            * {path.reduce((_, curr) => `> ${curr}`)}: {message}
-          </div>
-        )}
-      </For>
-    </div>
-  );
+const inputTypes: Record<keyof FormValues, string> = {
+  Username: "text",
+  Password: "password",
 };
+
+const RenderIssues: Component<{ issues: z.ZodIssue[] }> = ({ issues }) => (
+  <div class="m-1 justify-center rounded-md border-2 border-red-500 p-1">
+    <For each={issues}>
+      {({ message, path }) => (
+        <div class="mt-1 text-sm text-red-500">
+          * {path.reduce((_, curr) => `> ${curr}`)}: {message}
+        </div>
+      )}
+    </For>
+  </div>
+);
 
 export const Login: Component = () => {
   const [store, setStore] = createStore<FormValues>({
-    username: "",
-    password: "",
+    Username: "",
+    Password: "",
   });
 
   const [issues, setIssues] = createSignal<z.ZodIssue[]>();
@@ -54,43 +57,28 @@ export const Login: Component = () => {
           }}
           class="space-y-6"
         >
-          <div>
-            <label for="username" class="mb-2 block font-medium text-gray-700">
-              Username
-            </label>
-            <input
-              type="text"
-              name="username"
-              id="username"
-              value={store.username}
-              onInput={({ currentTarget: t }) => {
-                setStore(["username"], t.value);
-              }}
-              class={`block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 sm:text-sm ${
-                issues() ? "border-green-500" : "border-red-500"
-              }`}
-              required
-            />
-          </div>
-
-          <div>
-            <label for="password" class="mb-2 block font-medium text-gray-700">
-              Password
-            </label>
-            <input
-              type="password"
-              name="password"
-              id="password"
-              value={store.password}
-              onInput={({ currentTarget: t }) => {
-                setStore(["password"], t.value);
-              }}
-              class={`block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 sm:text-sm ${
-                issues() ? "border-green-500" : "border-red-500"
-              }`}
-              required
-            />
-          </div>
+          <For each={Object.keys(inputTypes) as (keyof typeof inputTypes)[]}>
+            {(element) => (
+              <div>
+                <label
+                  for={element}
+                  class="mb-2 block font-medium text-gray-700"
+                >
+                  {element}
+                </label>
+                <input
+                  type={inputTypes[element]}
+                  name={element}
+                  id={element}
+                  onInput={({ currentTarget: t }) => {
+                    setStore([element], t.value);
+                  }}
+                  class="block w-full rounded-md border-gray-300 p-1 shadow-sm focus:border-blue-500 focus:ring-blue-500 sm:text-sm"
+                  required
+                />
+              </div>
+            )}
+          </For>
 
           <div>
             <Show when={issues()} keyed>
