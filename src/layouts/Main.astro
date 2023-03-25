@@ -1,5 +1,5 @@
 ---
-import { Nav } from "~/components";
+import { Nav, ThemeToggle } from "~/components";
 import { extendFrom, InferExt } from "~/lib/extend";
 import Base from "./Base.astro";
 
@@ -20,6 +20,6 @@ const extNav = extendFrom([
 ---
 
 <Base title={title}>
-  <Nav links={extNav(navLinks)} />
+  <Nav links={extNav(navLinks)} client:load />
   <slot />
 </Base>

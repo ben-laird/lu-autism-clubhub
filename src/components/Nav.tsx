@@ -1,4 +1,5 @@
 import { Component, For } from "solid-js";
+import { ThemeToggle } from "./ThemeToggle";
 
 export interface Link {
   name: string;
@@ -14,13 +15,14 @@ export const Nav: Component<{ links: Link[] }> = (props) => (
       <ul class="flex space-x-4">
         <For each={props.links}>
           {({ href, name }) => (
-            <li>
+            <li class="flex items-center justify-center">
               <a href={href} class="text-gray-700 hover:text-gray-800">
                 {name}
               </a>
             </li>
           )}
         </For>
+        <ThemeToggle />
       </ul>
     </div>
   </nav>

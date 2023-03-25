@@ -19,8 +19,8 @@ export const ThemeToggle = () => {
     on(
       theme,
       () => {
-        const { add, remove } = document.documentElement.classList;
-        theme() === "light" ? remove("dark") : add("dark");
+        const element = document.documentElement.classList;
+        theme() === "light" ? element.remove("dark") : element.add("dark");
       },
       { defer: true }
     )
