@@ -1,6 +1,6 @@
 ---
-import { Nav, ThemeToggle } from "~/components";
-import { extendFrom, InferExt } from "~/lib/extend";
+import { Link, Nav } from "~/components";
+import { extendFrom, type InferExt } from "~/lib/extend";
 import Base from "./Base.astro";
 
 interface Props {
@@ -11,7 +11,7 @@ interface Props {
 
 const { title, navLinks } = Astro.props as Props;
 
-const extNav = extendFrom([
+const extNav = extendFrom<Link[]>([
   { name: "Home", href: "/" },
   { name: "About", href: "/about" },
   { name: "Log In", href: "/login" },
