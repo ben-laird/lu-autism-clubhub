@@ -1,6 +1,7 @@
 /* eslint-disable no-undef */
+// @ts-check
 /** @type {import('tailwindcss').Config} */
-module.exports = {
+const config = {
   mode: "jit",
   darkMode: "class",
   content: ["./src/**/*.{astro,html,js,jsx,md,mdx,svelte,ts,tsx,vue}"],
@@ -103,3 +104,5 @@ module.exports = {
   },
   plugins: [require("@tailwindcss/typography")],
 };
+
+module.exports = config;
