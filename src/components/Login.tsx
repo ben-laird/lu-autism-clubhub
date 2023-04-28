@@ -53,7 +53,10 @@ export const Login: Component = () => {
 
             const results = schema.safeParse(store);
             if (!results.success) setIssues(results.error.issues);
-            else setIssues(undefined);
+            else {
+              setIssues(undefined);
+              window.location.href = "/";
+            }
           }}
           class="space-y-6"
         >
