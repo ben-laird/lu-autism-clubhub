@@ -39,7 +39,8 @@ model Role {
 }
 
 model Project {
-  name String @id
+  name        String @id
+  description String
 
   // Categorizations
   Type   ProjectType @relation(fields: [typeId], references: [name])
@@ -61,15 +62,15 @@ model ProjectType {
 }
 
 model Step {
-  id     String   @id @default(uuid())
-  Type   StepType @relation(fields: [typeId], references: [name])
-  typeId String
+  name        String @id
+  description String
 
-  Project   Project @relation(fields: [projectId], references: [name])
+  Type      StepType @relation(fields: [typeId], references: [name])
+  typeId    String
+  Project   Project  @relation(fields: [projectId], references: [name])
   projectId String
-
-  Owner   User?   @relation(fields: [ownerId], references: [email])
-  ownerId String?
+  Owner     User?    @relation(fields: [ownerId], references: [email])
+  ownerId   String?
 }
 
 model StepType {
