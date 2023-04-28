@@ -4,7 +4,8 @@ import { Dashboard } from "~/components/Dashboard";
 import Main from "~/layouts/Main.astro";
 
 const cards = (await getCollection("meetings")).map(
-  ({ slug, data: { date }, body }) => ({
+  ({ slug, data: { date }, body, collection }) => ({
+    collection,
     title: slug,
     subtitle: date.toDateString(),
     content: `${body.slice(0, 70)}...`,

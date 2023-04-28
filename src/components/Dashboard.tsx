@@ -1,18 +1,26 @@
 import { Component, For } from "solid-js";
 
 export interface CardProps {
+  collection: string;
   title: string;
   subtitle: string;
   content: string;
 }
 
-const Card: Component<CardProps> = ({ title, subtitle, content }) => (
+const Card: Component<CardProps> = ({
+  title,
+  subtitle,
+  content,
+  collection,
+}) => (
   <div
     class="rounded-md bg-white p-6 shadow-md transition ease-in-out
   hover:scale-105 hover:bg-gray-300 hover:-outline-offset-1"
   >
     <div class="mb-2 text-lg font-medium">
-      <a href={`/meetings/${title}`} class="underline underline-offset-1">{title}</a>
+      <a href={`/${collection}/${title}`} class="underline underline-offset-1">
+        {title}
+      </a>
     </div>
     <div class="mb-4 text-gray-500">{subtitle}</div>
     <div>{content}</div>
