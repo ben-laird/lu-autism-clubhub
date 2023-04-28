@@ -18,7 +18,8 @@
     "change": "changeset",
     "change:empty": "changeset --empty",
     "review": "changeset version",
-    "release": "pnpm run build && changeset publish"
+    "release": "pnpm run build && changeset publish",
+    "sync-content": "astro sync"
   },
   "dependencies": {
     "@astrojs/solid-js": "^2.0.2",
